@@ -1,15 +1,3 @@
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 \thispagestyle{plain}
-
-\indent Emotionally intelligent Large Language Models (LLMs) are increasingly vital in domains such as mental health, education, and online communication, where empathy and sensitivity are essential. Unlike sentiment analysis, emotion recognition requires distinguishing overlapping affective states, a task at which current models struggle, especially with fine-grained labels.
-
-\vspace{0.2cm}
-\noindent This study introduces a retrieval-augmented prompting framework combining hybrid retrieval (BM25, TF–IDF, dense embeddings) with adaptive few-shot learning. The GoEmotions dataset was re-engineered into 27, 15, and 3 emotion classes, producing 50,448 validated examples. Three LLMs (GPT-4, DeepSeek-R1, Qwen-32B) were evaluated, showing that: (1) performance declines as granularity increases, (2) learning plateaus at small $N\star$ values, and (3) hybrid retrieval improves macro-F1 by roughly 17 % across models.
-
-\vspace{0.2cm}
-\noindent The resulting platform integrates data engineering, adaptive context scaling, retrieval-guided prompting, and visualization into a transparent, reproducible system for benchmarking emotional intelligence in LLMs. It demonstrates that combining lexical and semantic retrieval enhances interpretability and reliability, advancing emotion-aware AI for human-centered applications.
-
-\vspace{0.3cm}
-\noindent \textbf{Keywords:} \textbf{Emotional Intelligence}, \textbf{Large Language Models}, \textbf{Hybrid Retrieval}, \textbf{Few-Shot Learning}, \textbf{Microsoft Azure}.
-
