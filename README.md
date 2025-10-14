@@ -1,8 +1,6 @@
-# 🎓 Final Capstone Report — Emotion Recognition in Large Language Models (LLMs)
+# 🎓 Final Capstone Report 
 
 Welcome to the official LaTeX source code repository for my final-year capstone project:
-
-> **Emotion Recognition in Large Language Models (LLMs) via Hybrid Retrieval and Few-Shot Classification**
 
 This repository contains the **complete LaTeX environment**, all report chapters, appendices, images, bibliography, and configuration files required to compile the entire research report into a professional PDF using **TeX Live 2025** and **Visual Studio Code (VS Code)**.
 
@@ -289,7 +287,7 @@ Once installed, your environment will compile *any* academic paper, thesis, or t
 |--------|-------------|
 | **Author** | Aimen Guedhami *(Gathaa)* |
 | **Institution** | South Mediterranean University — MedTech |
-| **Degree** | Bachelor of Software Engineering |
+| **Degree** | Masters In Software Engineering |
 | **Year** | 2025 |
 | **Supervisor** | Dr. Jihene Ben Naceur |
 | **Title** | Emotion Recognition in Large Language Models via Hybrid Retrieval and Few-Shot Classification |
