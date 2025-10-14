@@ -293,14 +293,6 @@ Once installed, your environment will compile *any* academic paper, thesis, or t
 | **Title** | Emotion Recognition in Large Language Models via Hybrid Retrieval and Few-Shot Classification |
 | **Technologies** | LaTeX (XeLaTeX + Biber), TeX Live 2025, VS Code, Minted, TikZ |
 
----
-## 🏁 Final Notes
-
-This repository demonstrates a complete **Design Science Research (DSR)**-based LaTeX environment — modular, extensible, and ready for academic publication.  
-It’s suitable for research reports, dissertations, and technical documentation.
-
----
-
 ## ⭐ Credits
 
 Developed by **Aimen Guedhami (Gathaa)**  
