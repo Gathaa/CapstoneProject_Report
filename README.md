@@ -1,8 +1,6 @@
-# 🎓 Final Capstone Report — Emotion Recognition in Large Language Models (LLMs)
+# 🎓 Final Capstone Report
 
 Welcome to the official LaTeX source code repository for my final-year capstone project:
-
-> **Emotion Recognition in Large Language Models (LLMs) via Hybrid Retrieval and Few-Shot Classification**
 
 This repository contains the **complete LaTeX environment**, all report chapters, appendices, images, bibliography, and configuration files required to compile the entire research report into a professional PDF using **TeX Live 2025** and **Visual Studio Code (VS Code)**.
 
@@ -153,18 +151,6 @@ Wait for the build to complete
 
 The generated file main.pdf will appear in the workspace
 
-🧠 Understanding the LaTeX Build Flow
-The LaTeX → PDF process involves multiple stages. Here’s a simplified diagram:
-
-mermaid
-Copy code
-graph TD
-    A[main.tex] --> B[.aux (Auxiliary file)]
-    B --> C[biber: bibliography build]
-    C --> D[xelatex: 2nd compilation]
-    D --> E[main.pdf]
-Explanation:
-
 XeLaTeX compiles the main .tex file and creates temporary .aux and .bcf files.
 
 Biber reads the citations from references.bib and writes a .bbl file.
@@ -290,9 +276,8 @@ Once installed, your environment will compile any academic paper, thesis, or tec
 Field	Information
 Author	Aimen Guedhami (Gathaa)
 Institution	South Mediterranean University — MedTech
-Degree	Bachelor of Software Engineering
+Degree	Masters In Software Engineering
 Year	2025
-Supervisor	Dr. Jihene Ben Naceur
 Title	Emotion Recognition in Large Language Models via Hybrid Retrieval and Few-Shot Classification
 Technologies	LaTeX (XeLaTeX + Biber), TeX Live 2025, VS Code, Minted, TikZ
 
