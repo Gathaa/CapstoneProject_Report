@@ -1,0 +1,101 @@
+% ==============================================================================
+% APPENDIX F: Example N-Shot Prompt
+% File: appendices/appendix_f_prompt.tex
+% ==============================================================================
+
+\chapter{Appendix F: Example N-Shot Prompt Template}
+\label{app:prompt}
+
+This appendix provides an example of the prompt structure used to query the GPT-4 model in Iteration 3 and 4 for the N-shot classification task. The prompt is designed to be clear, unambiguous, and structured to elicit a consistent JSON output.
+
+\section{Prompt Architecture}
+
+The prompt consists of three main components:
+\begin{enumerate}
+    \item \textbf{The System Instruction:} A high-level directive that establishes the model's role, the task, the list of possible labels, and the required output format.
+    \item \textbf{The In-Context Examples (Few-Shot Demonstrations):} A balanced set of $N^*$ examples for each of the possible emotion labels.
+    \item \textbf{The User Query:} The new, unseen text that needs to be classified.
+\end{enumerate}
+
+\section{Example Prompt for 3-Label Granularity (N* = 4)}
+
+Below is a truncated example of a complete prompt that would be sent to the GPT-4 API for the 3-label classification task, where the adaptive mechanism determined that $N^*=4$.
+
+\hrule
+\vspace{1em}
+\textbf{SYSTEM INSTRUCTION:}
+\begin{verbatim}
+You are an expert emotion classifier. Your task is to classify the user's
+text into one of the following three categories: {Positive, Negative, Ambiguous}.
+
+You must provide your answer in a JSON format with two keys:
+1. "emotion": The single best emotion label from the list.
+2. "confidence": A score from 0.0 to 1.0 indicating your confidence.
+
+Here are some examples of how to classify text:
+
+--- EXAMPLES ---
+
+Text: "What a beautiful and wonderful day!"
+{"emotion": "Positive", "confidence": 1.0}
+
+Text: "I am so happy about my new promotion."
+{"emotion": "Positive", "confidence": 1.0}
+
+Text: "This is the best news I've heard all week."
+{"emotion": "Positive", "confidence": 1.0}
+
+Text: "Congratulations on your success, you deserve it!"
+{"emotion": "Positive", "confidence": 1.0}
+
+Text: "This is completely unacceptable service!"
+{"emotion": "Negative", "confidence": 1.0}
+
+Text: "I am furious with how I was treated."
+{"emotion": "Negative", "confidence": 1.0}
+
+Text: "The ending of that movie was just heartbreaking."
+{"emotion": "Negative", "confidence": 1.0}
+
+Text: "I feel so lonely and lost."
+{"emotion": "Negative", "confidence": 1.0}
+
+Text: "I'm not sure what to think about this new policy."
+{"emotion": "Ambiguous", "confidence": 0.9}
+
+Text: "That's an interesting perspective, I hadn't considered it."
+{"emotion": "Ambiguous", "confidence": 0.8}
+
+Text: "Hmm, I wonder what happens next."
+{"emotion": "Ambiguous", "confidence": 0.9}
+
+Text: "The results of the experiment are inconclusive."
+{"emotion": "Ambiguous", "confidence": 1.0}
+
+--- END OF EXAMPLES ---
+
+Now, classify the following user text.
+\end{verbatim}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+\textbf{USER QUERY:}
+\begin{verbatim}
+My flight was cancelled and the airline lost my luggage.
+\end{verbatim}
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\section{Expected Model Output}
+
+Given the prompt above, the expected output from the GPT-4 model would be a clean JSON object:
+\begin{verbatim}
+{
+  "emotion": "Negative",
+  "confidence": 1.0
+}
+\end{verbatim}
+
+This structured approach ensures that the model's output is consistent and can be reliably parsed by the evaluation script, minimizing errors and ensuring reproducibility.

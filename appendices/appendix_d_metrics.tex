@@ -1,0 +1,55 @@
+% ==============================================================================
+% APPENDIX D: Evaluation Metrics
+% File: appendices/appendix_d_metrics.tex
+% ==============================================================================
+
+\chapter{Appendix D: Detailed Evaluation Metrics}
+\label{app:metrics}
+
+This appendix defines the primary evaluation metrics used to assess the performance of the classification models in this study.
+
+\section{Standard Classification Metrics}
+
+For a multi-class classification problem, the following standard metrics are computed based on the components of a confusion matrix: True Positives (TP), False Positives (FP), and False Negatives (FN).
+
+\begin{itemize}
+    \item \textbf{Accuracy:} The proportion of correctly classified instances over the total number of instances. While intuitive, it can be misleading on imbalanced datasets.
+    \begin{equation}
+    \text{Accuracy} = \frac{\sum \text{Correct Predictions}}{\text{Total Predictions}}
+    \end{equation}
+
+    \item \textbf{Precision (per-class):} For a given class, this is the proportion of true positive predictions among all instances predicted as that class. It measures the "purity" of the predictions.
+    \begin{equation}
+    \text{Precision}_c = \frac{\text{TP}_c}{\text{TP}_c + \text{FP}_c}
+    \end{equation}
+
+    \item \textbf{Recall (per-class):} For a given class, this is the proportion of true positive predictions among all instances that actually belong to that class. It measures the "completeness" or sensitivity of the classifier.
+    \begin{equation}
+    \text{Recall}_c = \frac{\text{TP}_c}{\text{TP}_c + \text{FN}_c}
+    \end{equation}
+
+    \item \textbf{F1-Score (per-class):} The harmonic mean of precision and recall for a given class, providing a single, balanced measure of performance.
+    \begin{equation}
+    \text{F1-Score}_c = 2 \cdot \frac{\text{Precision}_c \cdot \text{Recall}_c}{\text{Precision}_c + \text{Recall}_c}
+    \end{equation}
+\end{itemize}
+
+\section{Macro-Averaged F1-Score}
+
+The GoEmotions dataset is imbalanced, with some emotion classes having far more examples than others. To prevent the overall performance metric from being dominated by the most frequent classes, we use the \textbf{Macro-Averaged F1-Score} as our primary metric for comparing models.
+
+The Macro-F1 score is calculated by computing the F1-score independently for each class and then taking the unweighted average of these scores. This gives equal weight to each class, regardless of its frequency.
+\begin{equation}
+\text{Macro-F1} = \frac{1}{|L|} \sum_{c \in L} \text{F1-Score}_c
+\end{equation}
+where $L$ is the set of all class labels. This metric was used as the objective function for the adaptive N-shot optimization in Iteration 3.
+
+\section{Deferral Rate}
+
+For the final gated cascade pipeline in Iteration 4, a new metric was introduced:
+\begin{itemize}
+    \item \textbf{Deferral Rate:} The percentage of instances in the evaluation set that did not meet the gating criteria ($\tau$ and $\delta$) and were consequently deferred from the fast semantic classifier to the N-shot LLM. This metric is a direct proxy for the computational cost and latency of the hybrid system.
+    \begin{equation}
+    \text{Deferral Rate} = \frac{\text{Number of Deferred Instances}}{\text{Total Number of Instances}} \times 100\%
+    \end{equation}
+\end{itemize}

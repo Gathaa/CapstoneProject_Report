@@ -1,0 +1,29 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Excerpt from the application demonstrating the dynamic rendering of results}
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{render\PYGZus{}single\PYGZus{}model\PYGZus{}results}\PYG{p}{(}\PYG{n}{model\PYGZus{}name}\PYG{p}{,} \PYG{n}{granularity}\PYG{p}{):}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Renders the detailed results page for a single selected model.}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{st}\PYG{o}{.}\PYG{n}{header}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}Detailed Analysis: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{model\PYGZus{}name}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} 1. Fetch data based on the user\PYGZsq{}s UI selections}
+    \PYG{n}{results} \PYG{o}{=} \PYG{n}{ENHANCED\PYGZus{}MODEL\PYGZus{}RESULTS}\PYG{p}{[}\PYG{n}{model\PYGZus{}name}\PYG{p}{]}
+    \PYG{n}{curve\PYGZus{}data} \PYG{o}{=} \PYG{n}{results}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}learning\PYGZus{}curve\PYGZdq{}}\PYG{p}{][}\PYG{n}{granularity}\PYG{p}{]}
+    \PYG{n}{plateau\PYGZus{}n} \PYG{o}{=} \PYG{n}{curve\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}plateau\PYGZus{}N\PYGZsq{}}\PYG{p}{]}
+
+    \PYG{c+c1}{\PYGZsh{} 2. Display key metric cards dynamically}
+    \PYG{c+c1}{\PYGZsh{} ... metric calculation and st.metric() calls ...}
+
+    \PYG{c+c1}{\PYGZsh{} 3. Generate and display the learning curve plot for the selected configuration}
+    \PYG{n}{st}\PYG{o}{.}\PYG{n}{subheader}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}Learning Curve Analysis (}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{granularity}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{)\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{fig\PYGZus{}curve} \PYG{o}{=} \PYG{n}{go}\PYG{o}{.}\PYG{n}{Figure}\PYG{p}{()}
+    \PYG{n}{fig\PYGZus{}curve}\PYG{o}{.}\PYG{n}{add\PYGZus{}trace}\PYG{p}{(}\PYG{n}{go}\PYG{o}{.}\PYG{n}{Scatter}\PYG{p}{(}
+        \PYG{n}{x}\PYG{o}{=}\PYG{n}{curve\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}N\PYGZsq{}}\PYG{p}{],}
+        \PYG{n}{y}\PYG{o}{=}\PYG{n}{curve\PYGZus{}data}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}F1\PYGZsq{}}\PYG{p}{],}
+        \PYG{n}{mode}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}lines+markers\PYGZsq{}}\PYG{p}{,}
+        \PYG{n}{line}\PYG{o}{=}\PYG{n+nb}{dict}\PYG{p}{(}\PYG{n}{color}\PYG{o}{=}\PYG{n}{MODEL\PYGZus{}OPTIONS}\PYG{p}{[}\PYG{n}{model\PYGZus{}name}\PYG{p}{][}\PYG{l+s+s2}{\PYGZdq{}color\PYGZdq{}}\PYG{p}{],} \PYG{n}{width}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
+    \PYG{p}{))}
+    \PYG{n}{fig\PYGZus{}curve}\PYG{o}{.}\PYG{n}{add\PYGZus{}vline}\PYG{p}{(}\PYG{n}{x}\PYG{o}{=}\PYG{n}{plateau\PYGZus{}n}\PYG{p}{,} \PYG{n}{line\PYGZus{}dash}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}dash\PYGZdq{}}\PYG{p}{,} \PYG{n}{line\PYGZus{}color}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}red\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{st}\PYG{o}{.}\PYG{n}{plotly\PYGZus{}chart}\PYG{p}{(}\PYG{n}{fig\PYGZus{}curve}\PYG{p}{,} \PYG{n}{use\PYGZus{}container\PYGZus{}width}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\end{MintedVerbatim}

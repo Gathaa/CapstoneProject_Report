@@ -1,0 +1,216 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble of the project    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This file contains the preamble of the project, which includes various packages and settings to customize the document layout, formatting, and styling.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Make longtable captions use full width (set after packages load)
+\AtBeginDocument{\setlength{\LTcapwidth}{\textwidth}}
+
+% Force reset table counter when switching to arabic numbering
+\let\oldpagenumbering\pagenumbering
+\renewcommand{\pagenumbering}[1]{%
+  \oldpagenumbering{#1}%
+  \ifnum\pdfstrcmp{#1}{arabic}=0
+    \setcounter{table}{-1}%
+  \fi
+}
+
+% Helpers for compact, "zoomed-out" tables
+\newcommand{\tighttable}{\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{1.2}}
+\newcommand{\shotsdef}{\textit{Number of shots} = count of labeled in-context examples provided to the model per prompt. 0 = zero-shot; "range" = variable N across runs; "N/A" = not an in-context setup (e.g., supervised fine-tuning).}
+
+% ---------------- Packages ----------------
+\usepackage{chngcntr}
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage{multirow,makecell}
+\usetikzlibrary{trees, arrows.meta, positioning, shapes}
+\usepackage{pdflscape}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tabularx,booktabs,ltablex,array}
+\usepackage{ragged2e}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define custom colors for correlation indicators
+\definecolor{corrGreen}{RGB}{34, 139, 34}
+\definecolor{corrRed}{RGB}{220, 20, 60}
+
+\usepackage{svg}
+\svgpath{{Images/}}
+\svgsetup{inkscapelatex=false}
+\usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{rotating}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{titling}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{changepage}
+\usepackage{indentfirst}
+\usepackage[nottoc]{tocbibind}
+\usepackage{acronym}
+\usepackage{setspace}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage[style=ieee]{biblatex}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% Table of Contents and List formatting
+\usepackage{tocloft}
+
+% Configure List of Figures formatting
+\renewcommand{\cftfigfont}{\normalfont}
+\renewcommand{\cftfigpagefont}{\normalfont}
+\setlength{\cftfignumwidth}{6em}
+\renewcommand{\cftfigpresnum}{\bfseries Figure~}
+\renewcommand{\cftfigaftersnum}{:}
+
+% Spacing
+\setstretch{1.5}
+
+% Font
+\IfFontExistsTF{Century Gothic}
+  {\setmainfont{Century Gothic}[
+      BoldFont={Century Gothic Bold},
+      ItalicFont={Century Gothic Italic},
+      BoldItalicFont={Century Gothic Bold Italic}
+   ]}
+  {\setmainfont{Arial}}
+
+% Provide heading font macro used below
+\newcommand{\headingfont}{}
+
+% ---- Chapter formatting (remove "Chapter" word) ----
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries}
+  {\thechapter}{1em}{}
+
+% Titling
+\titleformat*{\section}{\fontsize{16pt}{19.2pt}\bfseries\headingfont\MakeUppercase}
+\titleformat*{\subsection}{\fontsize{13pt}{15.6pt}\bfseries\headingfont}
+\titleformat*{\subsubsection}{\fontsize{13pt}{15.6pt}\bfseries\headingfont}
+
+% Subsubsubsection Command
+\newcommand{\subsubsubsection}[1]{%
+  {\normalfont\fontsize{12pt}{14pt}\selectfont\bfseries\itshape #1}%
+  \par\addvspace{1.5ex plus .2ex}%
+}
+
+% Subsubsubsubsection Command
+\newcommand{\subsubsubsubsection}[1]{%
+  \par\addvspace{3.25ex plus 1ex minus .2ex}%
+  {\normalfont\fontsize{10pt}{12pt}\selectfont\bfseries\itshape #1}%
+  \par\addvspace{1.5ex plus .2ex}%
+}
+
+% Adjust spacing options
+\titlespacing*{\paragraph}{0pt}{0.5em}{0.3em} 
+\titleformat{\paragraph}[block]{\bfseries}{}{0pt}{} 
+\titlespacing*{\section}{0pt}{2\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{1\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsubsubsection}{0pt}{1\baselineskip}{0.5\baselineskip}
+\titlespacing*{\subsubsubsubsection}{0pt}{1\baselineskip}{0.5\baselineskip}
+
+% Format \section
+\titleformat{\section}
+{\fontsize{16pt}{19pt}\selectfont\bfseries\MakeUppercase}
+{\thesection}
+{0.5em}
+{}
+
+% Format \subsection
+\titleformat{\subsection}
+{\fontsize{13pt}{15.6pt}\selectfont\bfseries}
+{\thesubsection}
+{0.5em}
+{}
+
+% Format \subsubsection
+\titleformat{\subsubsection}
+{\fontsize{13pt}{15.6pt}\selectfont\bfseries}
+{\thesubsubsection}
+{0.5em}
+{}
+
+% Format \subsubsubsection
+\titleformat{\subsubsubsection}
+{\fontsize{12pt}{14pt}\selectfont\bfseries\itshape}
+{}
+{0em}
+{}
+
+% Format \subsubsubsubsection
+\titleformat{\subsubsubsubsection}
+{\fontsize{10pt}{12pt}\selectfont\bfseries\itshape}
+{}
+{0em}
+{}
+
+% Margins
+\geometry{margin=2.5cm}
+
+% Justification
+\justifying
+
+% Pagination
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Set paragraph indentation
+\setlength{\parindent}{1.27cm}
+
+% Customize caption format for figures and tables
+\captionsetup{skip=0pt}
+\DeclareCaptionLabelFormat{bold}{\textbf{#1 #2}}
+\captionsetup[figure]{labelformat=bold}
+
+% Change the title of the table of contents
+\renewcommand{\contentsname}{Table of Contents}
+
+% Bibliography
+\addbibresource{references.bib}
+
+% Counter handling
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{equation}{chapter}
+
+% --- automatic List of Equations ---
+\usepackage{etoolbox}
+\newlistof{equations}{equ}{List of Equations}
+\counterwithout{equations}{chapter}
+\setlength{\cftequationsnumwidth}{6em}
+\renewcommand{\cftequationspresnum}{\bfseries Equation~}
+\renewcommand{\cftequationsaftersnum}{:}
+\newcommand{\addequation}[1]{%
+  \refstepcounter{equations}%
+  \phantomsection%
+  \addcontentsline{equ}{equations}{%
+    \protect\numberline{\theequations}#1}%
+}
+
+% List of Tables formatting
+\renewcommand{\cfttabpresnum}{\bfseries Table~}
+\renewcommand{\cfttabaftersnum}{:\hspace{0.5em}}
+\setlength{\cfttabnumwidth}{4.5em}
+
+% PGFPlots
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}

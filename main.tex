@@ -1,0 +1,137 @@
+% !TeX program = latexmk
+% !TeX options = -xelatex -synctex=1 -interaction=nonstopmode -file-line-error -halt-on-error -shell-escape -usebiber
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main File                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is the main file of your thesis/report. 
+% It controls the overall structure and includes all sections. 
+% You typically do not modify this file unless adding/removing sections.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt, a4paper, oneside]{report}
+
+% Include the preamble (packages, formatting, commands, etc.)
+\input{preamble}
+
+% ==============================================================
+% Only compile selected files (comment out \includeonly{} to build all)
+% Here we show everything until Chapter 1 (Introduction).
+% ==============================================================
+\includeonly{
+  titlepage,
+  frontmatter/approval,
+  frontmatter/declaration,
+  frontmatter/work-term,
+  frontmatter/abstract,
+  frontmatter/acknowledgments,
+  frontmatter/ListOfAbv,
+  frontmatter/notation,
+  chapters/chapter1_introduction,
+  chapters/chapter2_litreview,
+  chapters/chapter3_methodology,
+  chapters/chapter4_development,
+  chapters/chapter5_results,
+  chapters/chapter7_conclusion
+}
+
+\begin{document}
+
+% Ensure ToC depth and numbering are wide enough so nothing is "hidden"
+\setcounter{tocdepth}{2}    % chapters, sections, subsections in ToC
+\setcounter{secnumdepth}{3} % number down to subsubsections
+
+% ================= FRONT MATTER ==================
+\pagenumbering{roman} % Roman numerals for preliminary pages
+
+% Title page
+\input{titlepage.tex}
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+
+% Approval
+\phantomsection
+\input{frontmatter/approval.tex}
+\clearpage
+
+% Declaration
+\phantomsection
+\input{frontmatter/declaration.tex}
+\clearpage
+
+% Work term
+\phantomsection
+\input{frontmatter/work-term.tex}
+\clearpage
+
+% Abstract
+\phantomsection
+\input{frontmatter/abstract.tex}
+\clearpage
+
+% Acknowledgments
+\phantomsection
+\input{frontmatter/acknowledgments.tex}
+\clearpage
+
+% Table of contents
+\phantomsection
+\tableofcontents
+\clearpage
+% List of Abbreviations
+
+
+% List of figures
+\phantomsection
+\listoffigures
+\clearpage
+
+% List of tables
+\phantomsection
+\listoftables
+\clearpage
+
+% List of algorithms
+\phantomsection
+\listofequations
+\clearpage
+
+\phantomsection
+\input{frontmatter/ListOfAbv}
+\clearpage
+\phantomsection
+\input{frontmatter/notation}
+\clearpage
+% ================= MAIN MATTER ==================
+\pagenumbering{arabic} % Arabic numerals for chapters
+
+\include{chapters/chapter1_introduction}
+\clearpage
+\include{chapters/chapter2_litreview}
+\clearpage
+\include{chapters/chapter3_methodology}
+\clearpage
+\include{chapters/chapter4_development}
+\clearpage
+\include{chapters/chapter5_results}
+\clearpage
+\include{chapters/chapter7_conclusion}
+\clearpage
+
+
+% ================= BACK MATTER ==================
+% Not compiled now because of \includeonly
+
+% ================= REFERENCES ==================
+\cleardoublepage
+\phantomsection
+\printbibliography[heading=bibintoc,title={References}]
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+\clearpage
+
+\end{document}

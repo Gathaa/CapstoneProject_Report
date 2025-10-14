@@ -1,0 +1,51 @@
+% ==============================================================================
+% APPENDIX C: Reproducibility Details
+% File: appendices/appendix_c_reproducibility.tex
+% ==============================================================================
+
+\chapter{Appendix C: Reproducibility and Experimental Setup}
+\label{app:reproducibility}
+
+To ensure the scientific validity and reproducibility of this research, this appendix details the specific software versions, model identifiers, and key parameters used throughout the experiments.
+
+\section{Software and Libraries}
+
+All experiments were conducted in a Python environment. The key libraries and their versions are listed below:
+\begin{itemize}
+    \item Python: 3.10.x
+    \item Pandas: 2.0.x
+    \item NumPy: 1.24.x
+    \item Scikit-learn: 1.3.x
+    \item Rank-BM25: 0.2.x
+    \item Sentence-Transformers: 2.2.x
+    \item Transformers: 4.30.x
+    \item OpenAI: 0.28.x
+\end{itemize}
+
+\section{Model Identifiers and Parameters}
+
+\paragraph{Sentence Transformer Model (Iterations 1 \& 2).}
+The embedding model used for the Zero-Shot and N-Shot semantic classifiers was the \texttt{all-MiniLM-L6-v2} model, available from the Hugging Face model hub. This is a 384-dimensional sentence embedding model known for its excellent balance of speed and performance.
+
+\paragraph{Large Language Model (Iteration 3 \& 4).}
+The generative language model used was \textbf{GPT-4}, accessed via the Microsoft Azure OpenAI Service. All API calls were made to a provisioned endpoint with a fixed deployment version to ensure consistency. To guarantee deterministic outputs for reproducibility, the following key parameters were used for all classification tasks:
+\begin{itemize}
+    \item \textbf{Model:} GPT-4
+    \item \textbf{Temperature:} 0.0
+    \item \textbf{Top\_p:} 1.0
+    \item \textbf{Max Tokens:} 256 (sufficient for classification labels and brief reasoning)
+\end{itemize}
+
+\section{Experimental Constants}
+
+\paragraph{Random Seeds.} All stochastic processes, including the selection of examples for the N-shot prompts and any random sampling during data splitting, were controlled by setting a global random seed of \texttt{42} at the beginning of each script.
+
+\paragraph{Gated Cascade Thresholds (Iteration 4).}
+The thresholds for the gating mechanism in the final hybrid pipeline were determined based on empirical analysis of the score distributions on a held-out validation set. The final values used for the reported experiments were:
+\begin{itemize}
+    \item Minimum Confidence Threshold ($\tau$): 0.75
+    \item Minimum Margin Threshold ($\delta$): 0.15
+\end{itemize}
+
+\paragraph{Data Splits.}
+The GoEmotions dataset was split into a context/training set, a validation set, and a final evaluation/test set. The splits were stratified by emotion label to ensure proportional representation in each set. The artifacts and code for generating these exact splits are provided in the supplementary materials.

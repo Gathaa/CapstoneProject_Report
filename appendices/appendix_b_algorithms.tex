@@ -1,0 +1,74 @@
+% ==============================================================================
+% APPENDIX B: Algorithm Details
+% File: appendices/appendix_b_algorithms.tex
+% ==============================================================================
+
+\chapter{Appendix B: Detailed Algorithm Descriptions}
+\label{app:algorithms}
+
+This appendix provides a more detailed mathematical and procedural description of the core algorithms used in the classification engines throughout the iterations.
+
+\section{BM25 (Okapi BM25)}
+
+The BM25 algorithm, used in the Lexical Engine, is a ranking function that scores the relevance of a document to a given query. It is a bag-of-words retrieval function that ranks a set of documents based on the query terms appearing in each document.
+
+The score for a query $Q$ with terms $q_1, \dots, q_n$ and a document $D$ is given by:
+\begin{equation}
+\text{Score}(Q, D) = \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}
+\end{equation}
+Where:
+\begin{itemize}
+    \item $f(q_i, D)$ is the term frequency of term $q_i$ in the document $D$.
+    \item $|D|$ is the length of the document $D$ in words.
+    \item avgdl is the average document length in the entire collection.
+    \item $k_1$ and $b$ are free parameters, typically chosen as $k_1 \in [1.2, 2.0]$ and $b=0.75$. They control the term frequency saturation and document length normalization, respectively.
+    \item $\text{IDF}(q_i)$ is the Inverse Document Frequency of the term $q_i$, calculated as:
+    \begin{equation}
+    \text{IDF}(q_i) = \log\left(\frac{N - n(q_i) + 0.5}{n(q_i) + 0.5} + 1\right)
+    \end{equation}
+    where $N$ is the total number of documents in the collection, and $n(q_i)$ is the number of documents containing $q_i$.
+\end{itemize}
+In our context, each of the 27 emotion corpora was treated as a "document" $D$.
+
+\section{TF-IDF with Cosine Similarity}
+
+The TF-IDF (Term Frequency-Inverse Document Frequency) algorithm, used in the Statistical Engine, creates a numerical vector representation of a text.
+\begin{itemize}
+    \item \textbf{Term Frequency (TF):} $TF(t, d) = \frac{\text{count of term } t \text{ in document } d}{\text{number of words in document } d}$
+    \item \textbf{Inverse Document Frequency (IDF):} $IDF(t, D) = \log\left(\frac{\text{total number of documents } |D|}{\text{number of documents with term } t}\right)$
+    \item \textbf{TF-IDF Score:} $TFIDF(t, d, D) = TF(t, d) \cdot IDF(t, D)$
+\end{itemize}
+Each document (both the emotion corpora and the input text) is transformed into a vector where each component is the TF-IDF score for a word in the vocabulary.
+
+\paragraph{Cosine Similarity.} To compare two TF-IDF vectors, $A$ and $B$, we use Cosine Similarity, which measures the cosine of the angle between them:
+\begin{equation}
+\text{Cosine Similarity}(A, B) = \frac{A \cdot B}{\|A\| \|B\|} = \frac{\sum_{i=1}^{n} A_i B_i}{\sqrt{\sum_{i=1}^{n} A_i^2} \sqrt{\sum_{i=1}^{n} B_i^2}}
+\end{equation}
+A score of 1 means the vectors are identical in orientation, while 0 means they are orthogonal.
+
+\section{Semantic Prototype Creation}
+
+The N-Shot Semantic Engine in Iteration 2 relied on creating a prototype vector for each emotion class $l$. This was achieved by computing the centroid of the embeddings of its constituent examples from the context set $D_{context, l}$:
+\begin{equation}
+ P_l = \frac{1}{|D_{context, l}|} \sum_{t_i \in D_{context, l}} E(t_i)
+\end{equation}
+where $E(t_i)$ is the embedding of text $t_i$. The resulting prototype vector $P_l$ was then L2-normalized to have a unit length before being used for classification.
+
+\section{Gated Cascade Logic}
+
+The hybrid pipeline in Iteration 4 uses a gating mechanism to decide whether to accept a prediction from the fast semantic classifier or defer to the LLM. The decision is based on two scores derived from the semantic classifier's output vector of similarities:
+\begin{itemize}
+    \item $s_1$: The highest similarity score (the model's confidence in its top choice).
+    \item $s_2$: The second-highest similarity score.
+\end{itemize}
+And two pre-defined thresholds:
+\begin{itemize}
+    \item $\tau$: The minimum confidence threshold.
+    \item $\delta$: The minimum margin threshold.
+\end{itemize}
+The prediction from the semantic classifier is accepted if and only if both of the following conditions are met:
+\begin{enumerate}
+    \item $s_1 \ge \tau$ (The confidence is high enough)
+    \item $(s_1 - s_2) \ge \delta$ (The choice is unambiguous enough)
+\end{enumerate}
+If either condition fails, the input is deferred to the N-shot LLM.
