@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aimen Guedhami — Capstone Project</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+      color: #e4e4e7;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    header {
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .title-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+    
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .subtitle {
+      font-size: 1.25rem;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+    
+    .university {
+      font-size: 1rem;
+      color: #64748b;
+    }
+    
+    .card {
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #06b6d4;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .emoji {
+      font-size: 1.75rem;
+    }
+    
+    p {
+      color: #cbd5e1;
+      margin-bottom: 16px;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    
+    .feature-item {
+      background: rgba(51, 65, 85, 0.3);
+      padding: 16px;
+      border-radius: 12px;
+      border-left: 3px solid #3b82f6;
+    }
+    
+    .feature-item strong {
+      color: #e4e4e7;
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    .feature-item span {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    
+    .code-block {
+      background: #0f172a;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      overflow-x: auto;
+      font-family: "Consolas", "Monaco", monospace;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: #e2e8f0;
+    }
+    
+    .code-block code {
+      display: block;
+    }
+    
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .link-card {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .link-card:hover {
+      transform: translateX(4px);
+      border-color: #3b82f6;
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+    }
+    
+    .link-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    
+    .link-content h3 {
+      color: #06b6d4;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    
+    .link-content p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 48px 0 32px;
+      color: #64748b;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.1);
+      margin-top: 60px;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .card {
+        padding: 24px;
+      }
+      
+      header {
+        padding: 60px 0 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="title-badge">CAPSTONE PROJECT 2025</div>
+      <h1>Aimen Guedhami</h1>
+      <p class="subtitle">Local Latex Code Compiler (Free,Reliable and Works For 100%)</p>
+      <p class="university">MedTech · South Mediterranean University · Class of 2025</p>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2><span class="emoji">📘</span> Project Overview</h2>
+        <p>
+          This repository contains the complete LaTeX source for my final-year capstone project, featuring a comprehensive exploration of emotion recognition using large language models with hybrid retrieval mechanisms and few-shot classification techniques.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2><span class="emoji">🔧</span> Technical Features</h2>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <strong>Modular Architecture</strong>
+            <span>Organized chapters, appendices & frontmatter</span>
+          </div>
+          <div class="feature-item">
+            <strong>XeLaTeX + Biber</strong>
+            <span>Advanced typesetting with bibliography</span>
+          </div>
+          <div class="feature-item">
+            <strong>Minted Integration</strong>
+            <span>Automatic syntax highlighting</span>
+          </div>
+          <div class="feature-item">
+            <strong>TikZ & PlantUML</strong>
+            <span>Professional diagrams & UML modeling</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="emoji">⚙️</span> Build Instructions</h2>
+        <div class="code-block">
+          <code>xelatex main.tex</code>
+          <code>biber main</code>
+          <code>xelatex main.tex</code>
+          <code>xelatex main.tex</code>
+        </div>
+        <p style="margin-top: 16px; font-size: 0.9rem; color: #94a3b8;">
+          Requires TeX Live 2025 or compatible distribution
+        </p>
+      </div>
+
+      <div class="card">
+        <h2><span class="emoji">🔗</span> Resources</h2>
+        <div class="links-grid">
+          <a href="https://github.com/Gathaa/CapstoneProject_Report" class="link-card">
+            <span class="link-icon">📂</span>
+            <div class="link-content">
+              <h3>GitHub Repository</h3>
+              <p>View full source code</p>
+            </div>
+          </a>
+          <a href="https://github.com/Gathaa/CapstoneProject_Report/blob/main/README.md" class="link-card">
+            <span class="link-icon">📄</span>
+            <div class="link-content">
+              <h3>Documentation</h3>
+              <p>Read the README</p>
+            </div>
+          </a>
+          <a href="mailto:aimen.guedhami@medtech.tn" class="link-card">
+            <span class="link-icon">📧</span>
+            <div class="link-content">
+              <h3>Contact</h3>
+              <p>Get in touch</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 Aimen Guedhami · MedTech, South Mediterranean University</p>
+    </footer>
+  </div>
+</body>
+</html>
