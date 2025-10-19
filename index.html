@@ -6,7 +6,7 @@
   <title>Final Capstone Report - Aimen Guedhami</title>
   
   <!-- NEW FAVICON (Website Logo) -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 5 L95 27.5 V72.5 L50 95 L5 72.5 V27.5 Z' fill='%233498db'/%3E%3Cpath d='M50 15 L85 32.5 V67.5 L50 85 L15 67.5 V32.5 Z' fill='%230d0d0d'/%3E%3Cpath d='M50 25 L75 37.5 V62.5 L50 75 L25 62.5 V37.5 Z' fill='%233498db'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 5 L95 27.5 V72.5 L50 95 L5 72.5 V27.5 Z' fill='%232997ff'/%3E%3Cpath d='M50 15 L85 32.5 V67.5 L50 85 L15 67.5 V32.5 Z' fill='%23000'/%3E%3Cpath d='M50 25 L75 37.5 V62.5 L50 75 L25 62.5 V37.5 Z' fill='%232997ff'/%3E%3C/svg%3E">
   
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
@@ -54,6 +54,7 @@
         font-weight: 600;
         font-size: 1.25rem;
         color: var(--text-color);
+        text-decoration: none;
     }
 
     .logo-svg {
@@ -125,12 +126,15 @@
     .section {
       padding: 8rem 0;
       text-align: center;
+    }
+    
+    .section.fade-in {
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 1s ease-out, transform 1s ease-out;
     }
     
-    .section.visible {
+    .section.fade-in.visible {
         opacity: 1;
         transform: translateY(0);
     }
@@ -147,54 +151,53 @@
       color: var(--subtle-text);
       line-height: 1.7;
       max-width: 700px;
-      margin: 0 auto 3rem auto;
+      margin: 0 auto 4rem auto;
     }
     
-    /* ------------- APPLE-STYLE SCROLL FEATURES ------------- */
-    .features-wrapper {
-        position: relative;
-        height: 400vh; /* Height for 4 features */
-    }
-    .features-sticky-container {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
+    /* ------------- POP-IN FEATURES GRID ------------- */
+    .feature-grid {
+        display: grid;
+        /* Updated grid to better handle 6 items */
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2rem;
     }
     
-    .feature-panel {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transition: opacity 0.5s ease-in-out;
+    .feature-card {
+        background: var(--section-background);
+        padding: 2.5rem;
+        border-radius: 24px;
+        text-align: center;
+        border: 1px solid var(--border-color);
+        /* Initial state for animation */
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+        /* Transition for the pop-in effect */
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .feature-card.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
     
     .feature-icon {
-        font-size: 6rem;
-        margin-bottom: 2rem;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
         background: linear-gradient(135deg, var(--accent-color), #8e44ad);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
     .feature-title {
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem 0;
     }
     
     .feature-description {
-        font-size: 1.25rem;
+        font-size: 1rem;
         color: var(--subtle-text);
-        max-width: 500px;
+        line-height: 1.6;
     }
 
     /* ------------- GITHUB & CONTACT SECTIONS ------------- */
@@ -242,7 +245,6 @@
   </style>
 </head>
 <body>
-  <div id="progress-bar"></div>
 
   <!-- NAVBAR -->
   <nav>
@@ -271,53 +273,61 @@
       <p class="subtitle">A local LaTeX environment for uncompromising performance and security.</p>
   </header>
 
-  <!-- FEATURES INTRODUCTION -->
+  <!-- MAIN CONTENT CONTAINER -->
   <div class="container">
+      <!-- FEATURES SECTION -->
       <div class="section" id="features">
-          <h2 class="section-title">Why Go Local?</h2>
-          <p class="section-paragraph">Cloud-based tools are convenient. A local environment is powerful. Discover the difference when you have absolute control over your work.</p>
+          <div class="section-content fade-in">
+            <h2 class="section-title">Why Go Local?</h2>
+            <p class="section-paragraph">Cloud-based tools are convenient. A local environment is powerful. Discover the difference when you have absolute control over your work.</p>
+          </div>
+          <div class="feature-grid">
+              <div class="feature-card">
+                  <div class="feature-icon"><i class="fa-solid fa-server"></i></div>
+                  <h3 class="feature-title">Complete Independence</h3>
+                  <p class="feature-description">Work offline, anytime. Your productivity is never dependent on an internet connection.</p>
+              </div>
+              <div class="feature-card">
+                  <div class="feature-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                  <h3 class="feature-title">Blazing Fast</h3>
+                  <p class="feature-description">Compile documents instantly. Experience the raw speed of local processing with no lag.</p>
+              </div>
+              <div class="feature-card">
+                  <div class="feature-icon"><i class="fa-solid fa-lock"></i></div>
+                  <h3 class="feature-title">Inherently Secure</h3>
+                  <p class="feature-description">Your sensitive research remains on your machine. Private, secure, and entirely yours.</p>
+              </div>
+              <div class="feature-card">
+                  <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+                  <h3 class="feature-title">Total Control</h3>
+                  <p class="feature-description">Manage your own toolchain and packages. Create a perfectly tailored and reproducible workflow.</p>
+              </div>
+              <!-- NEW CARD 1 -->
+              <div class="feature-card">
+                  <div class="feature-icon"><i class="fa-solid fa-code-branch"></i></div>
+                  <h3 class="feature-title">Seamless Version Control</h3>
+                  <p class="feature-description">Directly integrate with Git and GitHub. Track every change and maintain a complete history of your work.</p>
+              </div>
+              <!-- NEW CARD 2 -->
+              <div class="feature-card">
+                  <div class="feature-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+                  <h3 class="feature-title">Limitless Customization</h3>
+                  <p class="feature-description">Tailor your entire environment. From themes to powerful extensions, build the exact tool you need.</p>
+              </div>
+          </div>
       </div>
-  </div>
 
-  <!-- APPLE-STYLE SCROLLING FEATURES -->
-  <div class="features-wrapper">
-      <div class="features-sticky-container">
-          <div class="feature-panel" id="feature-1">
-              <div class="feature-icon"><i class="fa-solid fa-server"></i></div>
-              <h3 class="feature-title">Complete Independence.</h3>
-              <p class="feature-description">Work offline, anytime. Your productivity is never dependent on an internet connection.</p>
-          </div>
-          <div class="feature-panel" id="feature-2">
-              <div class="feature-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
-              <h3 class="feature-title">Blazing Fast.</h3>
-              <p class="feature-description">Compile documents instantly. Experience the raw speed of local processing with no lag or queue times.</p>
-          </div>
-          <div class="feature-panel" id="feature-3">
-              <div class="feature-icon"><i class="fa-solid fa-lock"></i></div>
-              <h3 class="feature-title">Inherently Secure.</h3>
-              <p class="feature-description">Your sensitive research and data remain on your machine. Private, secure, and entirely yours.</p>
-          </div>
-          <div class="feature-panel" id="feature-4">
-              <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
-              <h3 class="feature-title">Total Control.</h3>
-              <p class="feature-description">Manage your own toolchain and packages. Create a perfectly tailored and reproducible workflow.</p>
-          </div>
-      </div>
-  </div>
-
-  <!-- MAIN CONTENT AFTER FEATURES -->
-  <div class="container">
       <!-- GITHUB REPOSITORY SECTION -->
-      <div class="section cta-section" id="repository">
+      <div class="section cta-section fade-in" id="repository">
           <h2 class="section-title">Open Source & Reproducible.</h2>
           <p class="section-paragraph">The complete source for this report is on GitHub. Explore the code, replicate the build, and use it as a foundation for your next project.</p>
-          <a href="https://github.com/Gathaa/CapstoneProject_Report" class="button" target="_blank">
+          <a href="https://github.com/GathA-a/CapstoneProject_Report" class="button" target="_blank">
               <i class="fa-brands fa-github"></i> View on GitHub
           </a>
       </div>
 
       <!-- CONTACT SECTION -->
-      <div class="section cta-section" id="contact">
+      <div class="section cta-section fade-in" id="contact">
           <h2 class="section-title">Get In Touch.</h2>
           <p class="section-paragraph">Have questions, feedback, or a project in mind? I'd love to hear from you.</p>
           <a href="mailto:aimen.guedhami@medtech.tn?subject=Capstone%20Project%20Inquiry" class="button">
@@ -330,49 +340,48 @@
 
   <footer>
     <p>Copyright © 2025 Aimen Guedhami (Gathaa). All rights reserved.<br>
-    <a href="https://github.com/Gathaa" target="_blank">GitHub</a>
+    <a href="https://github.com/GathA-a" target="_blank">GitHub</a>
     </p>
   </footer>
 
   <script>
-    // --- OBSERVER FOR FADE-IN ANIMATIONS ---
-    const observer = new IntersectionObserver((entries) => {
+    // --- OBSERVER FOR GENERAL FADE-IN SECTIONS ---
+    const fadeInObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
+          // Optional: unobserve after fading in to save resources
+          fadeInObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
 
-    document.querySelectorAll(".section").forEach((sec) => observer.observe(sec));
+    document.querySelectorAll(".fade-in").forEach((sec) => fadeInObserver.observe(sec));
 
-    // --- APPLE-STYLE SCROLLING FEATURES LOGIC ---
-    const featurePanels = document.querySelectorAll('.feature-panel');
-    const featuresWrapper = document.querySelector('.features-wrapper');
+    // --- OBSERVER FOR STAGGERED POP-IN CARDS ---
+    const grid = document.querySelector('.feature-grid');
+    const cards = document.querySelectorAll('.feature-card');
 
-    window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        const wrapperTop = featuresWrapper.offsetTop;
-        const wrapperHeight = featuresWrapper.offsetHeight;
-
-        // Calculate scroll progress within the feature wrapper (0 to 1)
-        const scrollProgress = Math.max(0, Math.min(1, (scrollPosition - wrapperTop) / (wrapperHeight - window.innerHeight)));
-        
-        // Determine which feature should be active
-        const activeFeatureIndex = Math.min(featurePanels.length - 1, Math.floor(scrollProgress * featurePanels.length));
-
-        featurePanels.forEach((panel, index) => {
-            if (index === activeFeatureIndex) {
-                panel.style.opacity = '1';
-            } else {
-                panel.style.opacity = '0';
+    const cardObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                cards.forEach((card, index) => {
+                    // Set a timeout for each card to create the staggered effect
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                    }, index * 150); // 150ms delay between each card
+                });
+                // Once the animation is triggered, we don't need to watch the grid anymore
+                observer.unobserve(grid);
             }
         });
-    });
-    
-    // Initial call to set the first feature active on page load
-    window.dispatchEvent(new Event('scroll'));
+    }, { threshold: 0.2 }); // Trigger when 20% of the grid is visible
 
+    // Start observing the feature grid
+    if (grid) {
+        cardObserver.observe(grid);
+    }
+    
     // --- BACK TO TOP BUTTON ---
     const backToTopButton = document.getElementById("back-to-top");
     window.addEventListener("scroll", () => {
